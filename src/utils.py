@@ -27,8 +27,7 @@ def validate_numbers(data: List[Any]) -> bool:
     """
     # TODO: 구현하세요
     # 힌트: isinstance(x, (int, float)) 사용
-    pass
-
+    return all(isinstance(x, (int, float)) for x in data) 
 
 def round_result(value: float, decimals: int = 2) -> float:
     """숫자를 지정한 소수점 자리수로 반올림합니다.
@@ -48,7 +47,7 @@ def round_result(value: float, decimals: int = 2) -> float:
     """
     # TODO: 구현하세요
     # 힌트: round() 내장 함수 사용
-    pass
+    return round(value, decimals)
 
 
 def format_output(name: str, value: float, decimals: int = 2) -> str:
@@ -70,4 +69,5 @@ def format_output(name: str, value: float, decimals: int = 2) -> str:
     """
     # TODO: 구현하세요
     # 힌트: f-string 또는 format() 사용
-    pass
+    return f"{name}: {int(round(value, decimals)) if decimals == 0 else float(str(round(value, decimals)))}"
+
