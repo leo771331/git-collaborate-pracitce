@@ -28,7 +28,9 @@ def mean(numbers: List[float]) -> float:
     """
     # TODO: 구현하세요
     # 힌트: 빈 리스트 체크 필요
-    pass
+    if numbers == []:
+        raise ValueError("빈리스트는 평균을 반환할수없습니다")
+    return sum(numbers)/len(numbers)
 
 
 def median(numbers: List[float]) -> float:
@@ -55,7 +57,16 @@ def median(numbers: List[float]) -> float:
     """
     # TODO: 구현하세요
     # 힌트: sorted()로 정렬 후 가운데 값 찾기
-    pass
+    if not numbers:
+        raise ValueError("빈 리스트는 중앙값을 계산할 수 없습니다.")
+    nums  = sorted(numbers)
+    n = len(nums)
+    if n % 2 == 1:
+        return nums[n//2]
+    else:
+        left =  nums[n // 2 - 1]
+        right = nums[n // 2]
+        return (left + right) / 2 
 
 
 def mode(numbers: List[float]) -> float:
@@ -81,8 +92,21 @@ def mode(numbers: List[float]) -> float:
     """
     # TODO: 구현하세요
     # 힌트: 딕셔너리로 빈도수 카운트
-    pass
+    if not numbers:
+        raise ValueError("빈 리스트는 최빈값을 계산할 수 없습니다.")
+    freq = {}
+    max_count = 0
+    result = numbers[0]
 
+    for num in numbers:
+        freq[num] = freq.get(num, 0) + 1
+        # 빈도가 더 클 때만 갱신 → 처음 나온 값 유지
+        if freq[num] > max_count:
+            max_count = freq[num]
+            result = num
+    return result
+
+    
 
 def variance(numbers: List[float]) -> float:
     """숫자 리스트의 분산을 반환합니다.
@@ -104,4 +128,12 @@ def variance(numbers: List[float]) -> float:
     """
     # TODO: 구현하세요
     # 힌트: 먼저 평균을 구한 후, 각 값과 평균의 차이의 제곱을 구하고 평균
-    pass
+    if not numbers:
+        raise ValueError("빈 리스트는 분산을 계산할 수 없습니다.")
+    
+    mean = sum(numbers) / len(numbers)
+    squared_diffs = []
+    for x in numbers:
+        squared_diffs.append((x - mean) ** 2)
+    return sum(squared_diffs) / len(numbers)
+
